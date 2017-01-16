@@ -1,7 +1,11 @@
 *.class
+**/target
+**/bin
+**/.polyglot.build.properties
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+workspace/
 
 # Package Files #
 *.jar
