@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class InsertSpeedJdbcTempleateAC {
 
-	public static final int ROW_COUNT = 10000;
+	public static final int ROW_COUNT = 100000;
 	public static final int COMMIT_COUNT = 500;
 
 	public static void main(String[] args) {
