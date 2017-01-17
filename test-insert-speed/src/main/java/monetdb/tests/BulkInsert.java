@@ -47,6 +47,7 @@ public class BulkInsert {
 					ps.setInt(1, i);
 					DateTime stop = DateTime.now();
 					DateTime start = stop.minusDays(365 * 3);
+					System.out.println(start);
 					do {
 
 						Timestamp ts = new Timestamp(start.getMillis());
@@ -54,21 +55,19 @@ public class BulkInsert {
 						ps.setDouble(3, Math.random());
 						ps.execute();
 						start = start.plusMinutes(1);
+						
 						commitCount++;
 						if (commitCount >= COMMIT_COUNT) {
 							con.commit();
 							commitCount = 0;
 						}
-					} while (start.isAfterNow());
+					} while (start.isBefore(stop.getMillis()));
 				}
 				con.commit();
 				return commitCount;
 			}
 
 		});
-		for (int i = 0; i < ID_COUNT; ++i) {
-
-		}
 		long ts2 = System.currentTimeMillis();
 		System.out.println("rows/second: " + ID_COUNT / ((ts2 - ts1) / 1000.0));
 		dataCtx.close();
