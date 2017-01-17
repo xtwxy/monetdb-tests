@@ -17,14 +17,19 @@
 
 	<dependencies>
 		<dependency>
+			<artifactId>joda-time</artifactId>
+			<groupId>joda-time</groupId>
+			<version>${joda-time.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>monetdb</groupId>
 			<artifactId>monetdb-jdbc</artifactId>
-			<version>2.24</version>
+			<version>${monetdb-jdbc.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
+			<version>${commons-dbcp.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -78,7 +83,7 @@
 				<configuration>
 					<!-- <mainClass>org.mybatis.generator.api.ShellRunner</mainClass> <commandlineArgs>-configfile 
 						src/main/resources/GeneratorConfig.xml</commandlineArgs> -->
-					<mainClass>monetdb.tests.InsertSpeedJdbcTempleateAC</mainClass>
+					<mainClass>monetdb.tests.BulkInsert</mainClass>
 				</configuration>
 			</plugin>
 		</plugins>
