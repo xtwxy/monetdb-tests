@@ -47,7 +47,7 @@ public class BulkInsert {
 					ps.setInt(1, i);
 					DateTime stop = DateTime.now();
 					DateTime start = stop.minusDays(365 * 1);
-					System.out.println(start);
+					System.out.println("id = " + i + ", start = " + start);
 					do {
 
 						Timestamp ts = new Timestamp(start.getMillis());
@@ -63,6 +63,7 @@ public class BulkInsert {
 						}
 					} while (start.isBefore(stop.getMillis()));
 				}
+				System.out.println("id = " + (ID_COUNT - 1) + ", start = " + DateTime.now());
 				con.commit();
 				return commitCount;
 			}
