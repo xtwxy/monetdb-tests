@@ -1,10 +1,5 @@
 package monetdb.tests;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-
 import org.joda.time.DateTime;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -12,9 +7,14 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+
 public class BulkInsert {
 
-	public static int ID_COUNT = 100000;
+	public static int ID_COUNT = 200000;
 	public static int COMMIT_COUNT = 500;
 
 	public static void main(String[] args) {
@@ -46,7 +46,7 @@ public class BulkInsert {
 				for (int i = 0; i < ID_COUNT; ++i) {
 					ps.setInt(1, i);
 					DateTime stop = DateTime.now();
-					DateTime start = stop.minusDays(365 * 3);
+					DateTime start = stop.minusDays(365 * 1);
 					System.out.println(start);
 					do {
 

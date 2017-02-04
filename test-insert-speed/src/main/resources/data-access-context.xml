@@ -12,7 +12,7 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="nl.cwi.monetdb.jdbc.MonetDataSource"/>
-		<property name="url" value="jdbc:monetdb://192.168.0.68/monitordb" />
+		<property name="url" value="jdbc:monetdb://localhost/monitordb" />
 		<property name="username" value="monitordb" />
 		<property name="password" value="monitordb" />
 	</bean>
