@@ -16,6 +16,7 @@ public class BulkInsert {
 
 	public static int ID_COUNT = 200000;
 	public static int COMMIT_COUNT = 500;
+	public static long totalCount = 0;
 
 	public static void main(String[] args) {
 		switch (args.length) {
@@ -35,13 +36,14 @@ public class BulkInsert {
 		jdbc.execute("delete from history_ai");
 		// insert.
 		long ts1 = System.currentTimeMillis();
+
 		jdbc.execute(new ConnectionCallback<Integer>() {
 
 			@Override
 			public Integer doInConnection(Connection con) throws SQLException, DataAccessException {
 				con.setAutoCommit(false);
 				PreparedStatement ps = con.prepareStatement("insert into history_ai(id, ts, value) values(?,?,?)");
-				int commitCount = 0;
+                                int commitCount = 0;
 
 				for (int i = 0; i < ID_COUNT; ++i) {
 					ps.setInt(1, i);
@@ -56,6 +58,7 @@ public class BulkInsert {
 						ps.execute();
 						start = start.plusMinutes(1);
 						
+						totalCount++;
 						commitCount++;
 						if (commitCount >= COMMIT_COUNT) {
 							con.commit();
@@ -63,14 +66,15 @@ public class BulkInsert {
 						}
 					} while (start.isBefore(stop.getMillis()));
 				}
-				System.out.println("id = " + (ID_COUNT - 1) + ", start = " + DateTime.now());
+				System.out.println("id = " + (ID_COUNT) + ", start = " + DateTime.now());
 				con.commit();
 				return commitCount;
 			}
 
 		});
 		long ts2 = System.currentTimeMillis();
-		System.out.println("rows/second: " + ID_COUNT / ((ts2 - ts1) / 1000.0));
+		System.out.println("total: " + totalCount + " rows.");
+		System.out.println("rows/second: " + totalCount / ((ts2 - ts1) / 1000.0));
 		dataCtx.close();
 	}
 
